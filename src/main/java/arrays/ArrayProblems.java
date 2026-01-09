@@ -6,8 +6,6 @@ public class ArrayProblems {
 
     /**
      * CTCI 1.1: Is Unique: Implement an algorithm to determine if a string has all unique characters.
-     * Time Complexity: O(n) where n is the length of the string.
-     * Space Complexity: O(1) assuming a fixed character set (ASCII).
      */
     public boolean isUnique(String str) {
         boolean[] frequencyMap = new boolean[128]; // ASCII character set

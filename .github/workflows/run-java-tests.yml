@@ -1,7 +1,6 @@
 name: Run Java Tests
 
-on:
-  push:
+on: [push, pull_request]
 
 jobs:
   run-tests:
@@ -16,6 +15,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Run Gradle tests
         run: |

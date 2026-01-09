@@ -19,6 +19,6 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Run Gradle tests
+      - name: Run Junit tests
         run: |
-          ./gradlew clean test
+          gradle clean test

@@ -1,32 +1,19 @@
 package linkedlists;
 
-public class Node {
-    public int data;
-    public Node next;
+public class Node<T> {
+    public T value;
+    public Node<T> next;
 
-    public Node(int data) {
-        this.data = data;
+    public Node(T value) {
+        this.value = value;
     }
 
-    public void append(Node head, int data) {
-        Node last = new Node(data);
-
-        if (head == null) {
-            head = last;
-            return;
-        }
-
-        Node current = head;
-        while (current.next != null) current = current.next;
-        current.next = last;
-    }
-
-    public static String printAsList(Node head) {
+    public static <T> String printAsList(Node<T> head) {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ");
-        Node current = head;
+        Node<T> current = head;
         while (current != null) {
-            sb.append(current.data);
+            sb.append(current.value);
             if (current.next != null) sb.append("-> ");
             current = current.next;
         }
@@ -36,6 +23,6 @@ public class Node {
 
     @Override
     public String toString() {
-        return String.valueOf(data);
+        return String.valueOf(value);
     }
 }

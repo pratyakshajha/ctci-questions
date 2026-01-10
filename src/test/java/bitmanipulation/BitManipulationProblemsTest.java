@@ -117,17 +117,17 @@ class BitManipulationProblemsTest {
 
         // Test cases for basic scenarios
         assertEquals(8, problems.flipBit(1775)); // 11011101111 -> 11011111111 (flip 5th bit from right)
-//        assertEquals(3, problems.flipBit(7));    // 111 -> 111 (no flip needed, already max)
+        assertEquals(4, problems.flipBit(7));    // 0111 -> 1111
         assertEquals(1, problems.flipBit(0));    // 0 -> 1
         assertEquals(2, problems.flipBit(1));    // 1 -> 11
         assertEquals(2, problems.flipBit(2));    // 10 -> 11
         assertEquals(3, problems.flipBit(5));    // 101 -> 111
         assertEquals(4, problems.flipBit(13));   // 1101 -> 1111
-        assertEquals(4, problems.flipBit(10));   // 1010 -> 1110 or 1011
+        assertEquals(3, problems.flipBit(10));   // 1010 -> 1110 or 1011
 
         // Test cases with multiple zeros
         assertEquals(3, problems.flipBit(21));   // 10101 -> 11101 or 10111
-        assertEquals(5, problems.flipBit(170));  // 10101010 -> 10111010 or 10101110
+        assertEquals(3, problems.flipBit(42));  // 101010 -> 101110 or 101011
 
         // Test cases with leading/trailing zeros
         assertEquals(2, problems.flipBit(4));    // 100 -> 110
@@ -138,8 +138,7 @@ class BitManipulationProblemsTest {
         assertEquals(32, problems.flipBit(~0)); // All ones (32-bit integer)
 
         // Test cases with alternating ones and zeros
-        assertEquals(2, problems.flipBit(0b10101010)); // 10101010 -> 10111010 (length
-        assertEquals(5, problems.flipBit(0b10101010)); // 10101010 -> 10111010 (length 5)
+        assertEquals(3, problems.flipBit(0b10101010)); // 10101010 -> 10111010 (length 4)
         assertEquals(3, problems.flipBit(0b01010101)); // 01010101 -> 01110101 (length 3)
     }
 }

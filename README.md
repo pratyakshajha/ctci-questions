@@ -2,7 +2,7 @@
 
 A personal project for implementing and testing solutions to problems from **"Cracking the Coding Interview"** (6th Ed.) using Java and Gradle. This repository serves as a practice lab for mastering common data structures and algorithmic patterns.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Java JDK (11 or higher)
@@ -31,7 +31,7 @@ allowing you to write your own solutions and validate them immediately.
 3. Implement the empty methods.
 4. Run the tests using `./gradlew test` to check your work
 
-## ✅ Implemented Solutions & Data Structures
+## Implemented Solutions & Data Structures
 
 ### Core Data Structures
 | Data Structure | File | Features |

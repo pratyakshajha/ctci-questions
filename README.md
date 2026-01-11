@@ -20,7 +20,18 @@ You can run all the unit tests from the command line using the Gradle wrapper. T
 
 Test reports are automatically generated in `build/reports/tests/test/index.html`.
 
-## ✅ Implemented Solutions & Data Structures
+## Practice Mode (`template` Branch)
+For a practicing, a `template` branch is available. This branch contains all the problem method 
+signatures but with their implementations removed. The complete JUnit test suite is included, 
+allowing you to write your own solutions and validate them immediately.
+
+**How to Use:**
+1.  Switch to the `template` branch:
+2. Navigate to a problem file (e.g., src/main/java/linkedlists/LinkedListProblems.java).
+3. Implement the empty methods.
+4. Run the tests using ./gradlew test to check your work
+
+## Implemented Solutions & Data Structures
 
 ### Core Data Structures
 | Data Structure | File | Features |

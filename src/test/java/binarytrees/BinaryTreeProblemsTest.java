@@ -1,4 +1,4 @@
-package binarytree;
+package binarytrees;
 
 import org.junit.jupiter.api.Test;
 
@@ -115,7 +115,7 @@ class BinaryTreeProblemsTest {
         Node<Integer> p12 = new Node<>(2);
         root12.left = p12;
         Node<Integer> q12 = new Node<>(3); // Not in tree
-        assertEquals(null, problems.lowestCommonAncestor(root12, p12, q12)); // Should return p12 as it's found
+        assertNull(problems.lowestCommonAncestor(root12, p12, q12));
 
         // Test Case 13: Complex tree structure
         Node<Integer> root13 = new Node<>(30);

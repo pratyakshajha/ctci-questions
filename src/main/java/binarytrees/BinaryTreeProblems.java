@@ -28,4 +28,13 @@ public class BinaryTreeProblems {
         if (root == node) return true;
         return (contains(root.left, node) || contains(root.right, node));
     }
+
+    /**
+     * CTCI 4.6: Successor: Write an algorithm to find the "next" node (i.e., in-order successor) of a given node in a binary search tree.
+     */
+    public <T> Node<T> findSuccessor(Node<T> root) {
+        if (root == null) return null;
+        while (root.left != null) root = root.left;
+        return root;
+    }
 }

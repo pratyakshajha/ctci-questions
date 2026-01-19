@@ -46,4 +46,25 @@ public class ArrayProblems {
         }
         return true;
     }
+
+    /**
+     * CTCI 1.2: Check Permutation: Given two strings, write a method to decide if one is a permutation of the other.
+     */
+    public boolean isPermutation(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+
+        int[] s1Map = new int[128]; // ASCII
+        int[] s2Map = new int[128];
+        for (int i = 0; i < s1.length(); i++) {
+            s1Map[s1.charAt(i)]++;
+        }
+        for (int i = 0; i < s2.length(); i++) {
+            s2Map[s2.charAt(i)]++;
+        }
+        for (int i = 0; i < s1Map.length; i++) {
+            if (s1Map[i] != s2Map[i]) return false;
+        }
+        return true;
+    }
+
 }

@@ -66,4 +66,37 @@ class ArrayProblemsTest {
         assertTrue(problems.isUniqueNoDs("ab c"));
         assertFalse(problems.isUniqueNoDs("a b c a"));
     }
+
+    @Test
+    void isPermutation() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test cases for permutations
+        assertTrue(problems.isPermutation("listen", "silent"));
+        assertTrue(problems.isPermutation("triangle", "integral"));
+        assertTrue(problems.isPermutation("aabb", "bbaa"));
+        assertTrue(problems.isPermutation("abc", "bca"));
+        assertTrue(problems.isPermutation("", "")); // Two empty strings are permutations
+
+        // Test cases for non-permutations (different lengths)
+        assertFalse(problems.isPermutation("hello", "helo"));
+        assertFalse(problems.isPermutation("abc", "abcd"));
+
+        // Test cases for non-permutations (same length, different characters)
+        assertFalse(problems.isPermutation("abc", "abd"));
+        assertFalse(problems.isPermutation("aabbc", "aabbd"));
+
+        // Test cases with different character counts
+        assertFalse(problems.isPermutation("aabb", "aaab"));
+        assertFalse(problems.isPermutation("aabbc", "abcde"));
+
+        // Test cases with spaces and special characters
+        assertTrue(problems.isPermutation("a b c", "b c a"));
+        assertFalse(problems.isPermutation("a b c", "a  b c")); // Extra space
+        assertTrue(problems.isPermutation("123!@", "@!321"));
+
+        // Test cases with case sensitivity (assuming case-sensitive permutation)
+        assertFalse(problems.isPermutation("God", "dog"));
+        assertTrue(problems.isPermutation("GoD", "DoG")); // Assuming ASCII comparison
+    }
 }

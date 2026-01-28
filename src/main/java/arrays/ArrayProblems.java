@@ -67,4 +67,27 @@ public class ArrayProblems {
         return true;
     }
 
+    /**
+     * CTCI 1.3: URLify: Write a method to replace all spaces in a string with '%20'.
+     * You may assume that the string has sufficient space at the end to hold the additional
+     * characters, and that you are given the "true" length of the string.
+     */
+    public void urlify(char[] str, int trueLength) {
+        int spaceCount = 0;
+        for (int i = 0; i < trueLength; i++) {
+            if (str[i] == ' ') spaceCount++;
+        }
+        int idx = trueLength + spaceCount*2;
+        for (int i=trueLength-1; i>=0; i--) {
+            if (str[i] == ' ') {
+                str[idx-1] = '0';
+                str[idx-2] = '2';
+                str[idx-3] = '%';
+                idx -= 3;
+            } else {
+                str[idx-1] = str[i];
+                idx--;
+            }
+        }
+    }
 }

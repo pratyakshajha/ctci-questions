@@ -3,6 +3,24 @@ package binarytrees;
 public class BinaryTreeProblems {
 
     /**
+     * CTCI 4.2: Minimal Tree: Given a sorted (increasing order) array with unique integer elements,
+     * write an algorithm to create a binary search tree with minimal height.
+     */
+    public Node<Integer> createBstFromSortedArray(int[] array) {
+        return createBstHelper(array, 0, array.length-1);
+    }
+
+    public Node<Integer> createBstHelper(int[] array, int left, int right) {
+        if (left > right) return null;
+
+        int mid = left + (right - left) / 2;
+        Node<Integer> root = new Node<>(array[mid]);
+        root.left = createBstHelper(array, left, mid-1);
+        root.right = createBstHelper(array, mid+1, right);
+        return root;
+    }
+
+    /**
      * CTCI 4.6: Successor: Write an algorithm to find the "next" node (i.e., in-order successor)
      * of a given node in a binary search tree.
      */

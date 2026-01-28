@@ -7,6 +7,55 @@ import static org.junit.jupiter.api.Assertions.*;
 class BinaryTreeProblemsTest {
 
     @Test
+    void createBstFromSortedArray() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Standard sorted array
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7};
+        Node<Integer> root1 = problems.createBstFromSortedArray(array1);
+        assertNotNull(root1);
+        assertEquals(4, root1.data);
+        assertEquals(2, root1.left.data);
+        assertEquals(6, root1.right.data);
+
+        // Test Case 2: Even number of elements
+        int[] array2 = {1, 2, 3, 4, 5, 6};
+        Node<Integer> root2 = problems.createBstFromSortedArray(array2);
+        assertNotNull(root2);
+        // mid of 0 and 5 is 2 -> array[2] = 3
+        assertEquals(3, root2.data);
+
+        // Test Case 3: Single element
+        int[] array3 = {10};
+        Node<Integer> root3 = problems.createBstFromSortedArray(array3);
+        assertEquals(10, root3.data);
+        assertNull(root3.left);
+        assertNull(root3.right);
+
+        // Test Case 4: Two elements
+        int[] array4 = {10, 20};
+        Node<Integer> root4 = problems.createBstFromSortedArray(array4);
+        assertEquals(10, root4.data);
+        assertNotNull(root4.right);
+        assertEquals(20, root4.right.data);
+
+        // Test Case 5: Empty array
+        int[] array5 = {};
+        Node<Integer> root5 = problems.createBstFromSortedArray(array5);
+        assertNull(root5);
+
+        // Test Case 6: Array with odd number of elements (mid is exact)
+        int[] array6 = {1, 2, 3, 4, 5};
+        Node<Integer> root6 = problems.createBstFromSortedArray(array6);
+        assertNotNull(root6);
+        assertEquals(3, root6.data);
+        assertEquals(1, root6.left.data);
+        assertEquals(4, root6.right.data);
+        assertEquals(2, root6.left.right.data);
+        assertEquals(5, root6.right.right.data);
+    }
+
+    @Test
     void findSuccessor() {
         BinaryTreeProblems problems = new BinaryTreeProblems();
 

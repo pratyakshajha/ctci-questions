@@ -134,4 +134,26 @@ class ArrayProblemsTest {
         problems.urlify(str6, 4);
         assertEquals("a%20%20b", new String(str6));
     }
+
+    @Test
+    void isPalindromePermutation() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test cases for palindrome permutations
+        assertTrue(problems.isPalindromePermutation("tact coa")); // "taco cat"
+        assertTrue(problems.isPalindromePermutation("atco cta")); // "atco eta"
+        assertTrue(problems.isPalindromePermutation("aabb"));
+        assertTrue(problems.isPalindromePermutation("aaa"));
+        assertTrue(problems.isPalindromePermutation("a"));
+        assertTrue(problems.isPalindromePermutation(""));
+
+        // Test cases for non-palindrome permutations
+        assertFalse(problems.isPalindromePermutation("abcde"));
+        assertFalse(problems.isPalindromePermutation("aabbcd"));
+        assertFalse(problems.isPalindromePermutation("code"));
+
+        // Test cases with spaces (assuming spaces are treated as characters)
+        assertTrue(problems.isPalindromePermutation("taco cat"));
+        assertFalse(problems.isPalindromePermutation("taco catz"));
+    }
 }

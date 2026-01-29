@@ -90,4 +90,24 @@ public class ArrayProblems {
             }
         }
     }
+
+    /**
+     * CTCI 1.4: Palindrome Permutation: Given a string, write a function to check if it is a permutation of a palindrome.
+     */
+    public boolean isPalindromePermutation(String phrase) {
+        int[] fMap = new int[26];
+        for (char c : phrase.toCharArray()) {
+            if (Character.isLetter(c))
+                fMap[c-'a']++;
+        }
+
+        boolean foundOdd = false;
+        for (int freq : fMap) {
+            if (freq % 2 == 1) {
+                if (foundOdd) return false;
+                foundOdd = true;
+            }
+        }
+        return true;
+    }
 }

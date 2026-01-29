@@ -1,5 +1,10 @@
 package binarytrees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class BinaryTreeProblems {
 
     /**
@@ -18,6 +23,75 @@ public class BinaryTreeProblems {
         root.left = createBstHelper(array, left, mid-1);
         root.right = createBstHelper(array, mid+1, right);
         return root;
+    }
+
+    /**
+     * CTCI 4.3: List of Depths: Given a binary tree, design an algorithm which creates
+     * a linked list of all the nodes at each depth.
+     */
+    public <T> List<LinkedList<Node<T>>> listOfDepths(Node<T> root) {
+        if (root == null) return null;
+        List<LinkedList<Node<T>>> result = new LinkedList<>();
+
+        // do a BFS traversal
+        Queue<Node<T>> toVisit = new LinkedList<>();
+        toVisit.add(root);
+        while (!toVisit.isEmpty()) {
+            int level = toVisit.size();
+            LinkedList<Node<T>> list = new LinkedList<>();
+            for (int i=0; i<level; i++) {
+                Node<T> current = toVisit.poll();
+                list.add(current);
+                if (current.left != null) toVisit.add(current.left);
+                if (current.right != null) toVisit.add(current.right);
+            }
+            result.add(list);
+        }
+        return result;
+    }
+
+    // less space
+    public <T> List<LinkedList<Node<T>>> listOfDepths2(Node<T> root) {
+        if (root == null) return null;
+        List<LinkedList<Node<T>>> result = new LinkedList<>();
+        LinkedList<Node<T>> current = new LinkedList<>();
+        current.add(root);
+
+        // do a BFS traversal
+        while (!current.isEmpty()) {
+            result.add(current); // add previous level to result
+            LinkedList<Node<T>> parents = current;
+            current = new LinkedList<>();
+            for (Node<T> parent : parents) {
+                if (parent.left != null) current.add(parent.left);
+                if (parent.right != null) current.add(parent.right);
+            }
+        }
+        return result;
+    }
+
+    // recursive
+    public <T> List<LinkedList<Node<T>>> listOfDepths3(Node<T> root) {
+        if (root == null) return null;
+        
+        List<LinkedList<Node<T>>> result = new ArrayList<>();
+        helper(root, 0, result);
+        return result;
+    }
+
+    public <T> void helper(Node<T> root, int level, List<LinkedList<Node<T>>> result) {
+        if (root == null) return;
+
+        LinkedList<Node<T>> list = null;
+        if (result.size() == level) {
+            list = new LinkedList<>();
+            result.add(list);
+        } else {
+            list = result.get(level);
+        }
+        list.add(root);
+        helper(root.left, level+1, result);
+        helper(root.right, level+1, result);
     }
 
     /**

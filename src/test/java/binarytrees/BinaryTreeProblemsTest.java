@@ -2,6 +2,9 @@ package binarytrees;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeProblemsTest {
@@ -53,6 +56,156 @@ class BinaryTreeProblemsTest {
         assertEquals(4, root6.right.data);
         assertEquals(2, root6.left.right.data);
         assertEquals(5, root6.right.right.data);
+    }
+
+    @Test
+    void listOfDepths() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Standard tree
+        Node<Integer> root1 = new Node<>(1);
+        root1.left = new Node<>(2);
+        root1.right = new Node<>(3);
+        root1.left.left = new Node<>(4);
+        root1.left.right = new Node<>(5);
+        root1.right.right = new Node<>(6);
+
+        List<LinkedList<Node<Integer>>> result1 = problems.listOfDepths(root1);
+        assertEquals(3, result1.size());
+        assertEquals(1, result1.get(0).size());
+        assertEquals(1, result1.get(0).get(0).data);
+        assertEquals(2, result1.get(1).size());
+        assertEquals(3, result1.get(2).size());
+
+        // Test Case 2: Single node
+        Node<Integer> root2 = new Node<>(10);
+        List<LinkedList<Node<Integer>>> result2 = problems.listOfDepths(root2);
+        assertEquals(1, result2.size());
+        assertEquals(10, result2.get(0).get(0).data);
+
+        // Test Case 3: Empty tree
+        assertNull(problems.listOfDepths(null));
+
+        // Test Case 4: Unbalanced tree (linked list style)
+        Node<Integer> root4 = new Node<>(1);
+        root4.right = new Node<>(2);
+        root4.right.right = new Node<>(3);
+        List<LinkedList<Node<Integer>>> result4 = problems.listOfDepths(root4);
+        assertEquals(3, result4.size());
+        for (LinkedList<Node<Integer>> list : result4) {
+            assertEquals(1, list.size());
+        }
+
+        // Test Case 5: String data type
+        Node<String> root5 = new Node<>("A");
+        root5.left = new Node<>("B");
+        root5.right = new Node<>("C");
+        List<LinkedList<Node<String>>> result5 = problems.listOfDepths(root5);
+        assertEquals(2, result5.size());
+        assertEquals("A", result5.get(0).get(0).data);
+        assertEquals(2, result5.get(1).size());
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("B")));
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("C")));
+    }
+
+    @Test
+    void listOfDepths2() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Standard tree
+        Node<Integer> root1 = new Node<>(1);
+        root1.left = new Node<>(2);
+        root1.right = new Node<>(3);
+        root1.left.left = new Node<>(4);
+        root1.left.right = new Node<>(5);
+        root1.right.right = new Node<>(6);
+
+        List<LinkedList<Node<Integer>>> result1 = problems.listOfDepths2(root1);
+        assertEquals(3, result1.size());
+        assertEquals(1, result1.get(0).size());
+        assertEquals(1, result1.get(0).get(0).data);
+        assertEquals(2, result1.get(1).size());
+        assertEquals(3, result1.get(2).size());
+
+        // Test Case 2: Single node
+        Node<Integer> root2 = new Node<>(10);
+        List<LinkedList<Node<Integer>>> result2 = problems.listOfDepths2(root2);
+        assertEquals(1, result2.size());
+        assertEquals(10, result2.get(0).get(0).data);
+
+        // Test Case 3: Empty tree
+        assertNull(problems.listOfDepths2(null));
+
+        // Test Case 4: Unbalanced tree (linked list style)
+        Node<Integer> root4 = new Node<>(1);
+        root4.right = new Node<>(2);
+        root4.right.right = new Node<>(3);
+        List<LinkedList<Node<Integer>>> result4 = problems.listOfDepths2(root4);
+        assertEquals(3, result4.size());
+        for (LinkedList<Node<Integer>> list : result4) {
+            assertEquals(1, list.size());
+        }
+
+        // Test Case 5: String data type
+        Node<String> root5 = new Node<>("A");
+        root5.left = new Node<>("B");
+        root5.right = new Node<>("C");
+        List<LinkedList<Node<String>>> result5 = problems.listOfDepths2(root5);
+        assertEquals(2, result5.size());
+        assertEquals("A", result5.get(0).get(0).data);
+        assertEquals(2, result5.get(1).size());
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("B")));
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("C")));
+    }
+
+    @Test
+    void listOfDepths3() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Standard tree
+        Node<Integer> root1 = new Node<>(1);
+        root1.left = new Node<>(2);
+        root1.right = new Node<>(3);
+        root1.left.left = new Node<>(4);
+        root1.left.right = new Node<>(5);
+        root1.right.right = new Node<>(6);
+
+        List<LinkedList<Node<Integer>>> result1 = problems.listOfDepths3(root1);
+        assertEquals(3, result1.size());
+        assertEquals(1, result1.get(0).size());
+        assertEquals(1, result1.get(0).get(0).data);
+        assertEquals(2, result1.get(1).size());
+        assertEquals(3, result1.get(2).size());
+
+        // Test Case 2: Single node
+        Node<Integer> root2 = new Node<>(10);
+        List<LinkedList<Node<Integer>>> result2 = problems.listOfDepths3(root2);
+        assertEquals(1, result2.size());
+        assertEquals(10, result2.get(0).get(0).data);
+
+        // Test Case 3: Empty tree
+        assertNull(problems.listOfDepths3(null));
+
+        // Test Case 4: Unbalanced tree (linked list style)
+        Node<Integer> root4 = new Node<>(1);
+        root4.right = new Node<>(2);
+        root4.right.right = new Node<>(3);
+        List<LinkedList<Node<Integer>>> result4 = problems.listOfDepths3(root4);
+        assertEquals(3, result4.size());
+        for (LinkedList<Node<Integer>> list : result4) {
+            assertEquals(1, list.size());
+        }
+
+        // Test Case 5: String data type
+        Node<String> root5 = new Node<>("A");
+        root5.left = new Node<>("B");
+        root5.right = new Node<>("C");
+        List<LinkedList<Node<String>>> result5 = problems.listOfDepths3(root5);
+        assertEquals(2, result5.size());
+        assertEquals("A", result5.get(0).get(0).data);
+        assertEquals(2, result5.get(1).size());
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("B")));
+        assertTrue(result5.get(1).stream().anyMatch(n -> n.data.equals("C")));
     }
 
     @Test

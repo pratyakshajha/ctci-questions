@@ -209,6 +209,43 @@ class BinaryTreeProblemsTest {
     }
 
     @Test
+    void checkBalanced() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Balanced tree
+        Node<Integer> root1 = new Node<>(1);
+        root1.left = new Node<>(2);
+        root1.right = new Node<>(3);
+        assertTrue(problems.checkBalanced(root1));
+
+        // Test Case 2: Unbalanced tree
+        Node<Integer> root2 = new Node<>(1);
+        root2.left = new Node<>(2);
+        root2.left.left = new Node<>(3);
+        assertFalse(problems.checkBalanced(root2));
+
+        // Test Case 3: Single node
+        assertTrue(problems.checkBalanced(new Node<>(10)));
+
+        // Test Case 4: Empty tree
+        assertTrue(problems.checkBalanced(null));
+
+        // Test Case 5: Complex balanced tree
+        Node<Integer> root5 = new Node<>(1);
+        root5.left = new Node<>(2);
+        root5.right = new Node<>(3);
+        root5.left.left = new Node<>(4);
+        root5.left.right = new Node<>(5);
+        root5.right.left = new Node<>(6);
+        assertTrue(problems.checkBalanced(root5));
+
+        // Test Case 6: Complex unbalanced tree
+        root5.left.left.left = new Node<>(7);
+        root5.left.left.left.right = new Node<>(8);
+        assertFalse(problems.checkBalanced(root5));
+    }
+
+    @Test
     void findSuccessor() {
         BinaryTreeProblems problems = new BinaryTreeProblems();
 

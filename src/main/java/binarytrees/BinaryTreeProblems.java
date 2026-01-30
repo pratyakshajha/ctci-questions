@@ -95,6 +95,33 @@ public class BinaryTreeProblems {
     }
 
     /**
+     * CTCI 4.4: Check Balanced: Implement a function to check if a binary tree is balanced.
+     * For the purpose of this question, a balanced tree is defined to be a tree such that the
+     * heights of the two subtrees of any node never differ by more than one.
+     */
+    public <T> boolean checkBalanced(Node<T> root) {
+        if (root == null) return true;
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
+        return Math.abs(leftHeight - rightHeight) <= 1;
+    }
+
+    public <T> int getHeight(Node<T> root) {
+        if (root == null) return 0;
+
+        int left = getHeight(root.left);
+        if (left == -1) return -1;
+        int right = getHeight(root.right);
+        if (right == -1) return -1;
+
+        // with this, the whole subtree's height is not calculated
+        // we return right after diff > 1 and propagate it above
+        // actual height value is not important, rather it being >1 is important
+        if (Math.abs(left - right) > 1) return -1;
+        return Math.max(left, right) + 1;
+    }
+
+    /**
      * CTCI 4.6: Successor: Write an algorithm to find the "next" node (i.e., in-order successor)
      * of a given node in a binary search tree.
      */

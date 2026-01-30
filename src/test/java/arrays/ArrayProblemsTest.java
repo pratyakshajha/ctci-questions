@@ -156,4 +156,36 @@ class ArrayProblemsTest {
         assertTrue(problems.isPalindromePermutation("taco cat"));
         assertFalse(problems.isPalindromePermutation("taco catz"));
     }
+
+    @Test
+    void oneAway() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test cases for zero edits (same strings)
+        assertTrue(problems.oneAway("pale", "pale"));
+        assertTrue(problems.oneAway("", ""));
+
+        // Test cases for one replacement
+        assertTrue(problems.oneAway("pale", "bale"));
+        assertTrue(problems.oneAway("abcde", "abfde"));
+
+        // Test cases for one insertion
+        assertTrue(problems.oneAway("pale", "pales"));
+        assertTrue(problems.oneAway("ple", "pale"));
+
+        // Test cases for one removal
+        assertTrue(problems.oneAway("pale", "ple"));
+        assertTrue(problems.oneAway("pales", "pale"));
+
+        // Test cases for more than one edit
+        assertFalse(problems.oneAway("pale", "bake")); // two replacements
+        assertFalse(problems.oneAway("pale", "plee")); // one removal + one replacement
+        assertFalse(problems.oneAway("pale", "palesy")); // two insertions
+        assertFalse(problems.oneAway("pale", "pa")); // two removals
+
+        // Test cases with different lengths
+        assertFalse(problems.oneAway("pale", "palestine"));
+        assertTrue(problems.oneAway("p", ""));
+        assertTrue(problems.oneAway("", "p"));
+    }
 }

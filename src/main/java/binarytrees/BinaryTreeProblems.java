@@ -116,9 +116,23 @@ public class BinaryTreeProblems {
 
         // with this, the whole subtree's height is not calculated
         // we return right after diff > 1 and propagate it above
-        // actual height value is not important, rather it being >1 is important
+        // actual height is not important, rather it being >1 is important
         if (Math.abs(left - right) > 1) return -1;
         return Math.max(left, right) + 1;
+    }
+
+    /**
+     * CTCI 4.5: Validate BST: Implement a function to check if a binary tree is a binary search tree.
+     */
+    public boolean validateBst(Node<Integer> root) {
+        return validateBstHelper(root, null, null);
+    }
+
+    public boolean validateBstHelper(Node<Integer> root, Integer min, Integer max) {
+        if (root == null) return true;
+        if ((min != null && root.data < min) || (max != null && root.data > max)) return false;
+        // left subtree < root < right subtree
+        return validateBstHelper(root.left, min, root.data) && validateBstHelper(root.right, root.data, max);
     }
 
     /**

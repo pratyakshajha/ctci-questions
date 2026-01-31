@@ -246,6 +246,50 @@ class BinaryTreeProblemsTest {
     }
 
     @Test
+    void validateBst() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Valid BST
+        Node<Integer> root1 = new Node<>(10);
+        root1.left = new Node<>(5);
+        root1.right = new Node<>(15);
+        root1.left.left = new Node<>(2);
+        root1.left.right = new Node<>(7);
+        assertTrue(problems.validateBst(root1));
+
+        // Test Case 2: Invalid BST (right child smaller than root)
+        Node<Integer> root2 = new Node<>(10);
+        root2.left = new Node<>(5);
+        root2.right = new Node<>(8);
+        assertFalse(problems.validateBst(root2));
+
+        // Test Case 3: Invalid BST (left child larger than root)
+        Node<Integer> root3 = new Node<>(10);
+        root3.left = new Node<>(12);
+        root3.right = new Node<>(15);
+        assertFalse(problems.validateBst(root3));
+
+        // Test Case 4: Invalid BST (deep node violates ancestor constraint)
+        Node<Integer> root4 = new Node<>(20);
+        root4.left = new Node<>(10);
+        root4.right = new Node<>(30);
+        root4.left.right = new Node<>(25); // 25 is > 20, invalid for left subtree
+        assertFalse(problems.validateBst(root4));
+
+        // Test Case 5: Single node
+        assertTrue(problems.validateBst(new Node<>(10)));
+
+        // Test Case 6: Empty tree
+        assertTrue(problems.validateBst(null));
+
+        // Test Case 7: BST with equal values (depends on definition, usually left <= root < right)
+        // Our implementation uses strict < min or > max, so we check boundaries
+        Node<Integer> root7 = new Node<>(10);
+        root7.left = new Node<>(10);
+        assertTrue(problems.validateBst(root7));
+    }
+
+    @Test
     void findSuccessor() {
         BinaryTreeProblems problems = new BinaryTreeProblems();
 

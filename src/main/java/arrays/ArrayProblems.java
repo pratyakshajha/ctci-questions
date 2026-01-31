@@ -110,4 +110,55 @@ public class ArrayProblems {
         }
         return true;
     }
+
+    /**
+     * CTCI 1.5: One Away: There are three types of edits that can be performed on strings:
+     * insert a character, remove a character, or replace a character. Given two strings,
+     * write a function to check if they are one edit (or zero edits) away.
+     */
+    public boolean oneAway(String s1, String s2) {
+        if (Math.abs(s1.length() - s2.length()) > 1) return false;
+
+        int idxShorter=0, idxLonger=0;
+        String longer = s1.length() > s2.length() ? s1 : s2;
+        String shorter = s1.length() > s2.length() ? s2 : s1;
+        boolean foundDiff = false, isSameLength = s1.length() == s2.length();
+
+        while (idxShorter<shorter.length() && idxLonger<longer.length()) {
+            if (shorter.charAt(idxShorter) != longer.charAt(idxLonger)) {
+                if (foundDiff) return false;
+                foundDiff = true;
+                // replace
+                if (isSameLength) {
+                    // move shorter pointer, loner will be moved at the end
+                    idxShorter++;
+                }
+            } else {
+                idxShorter++; // move shorter as insert/delete is done
+            }
+            idxLonger++; // always move long pointer
+        }
+
+        return true;
+    }
+
+    /**
+     * CTCI 1.6: String Compression: Implement a method to perform basic string compression using the counts of repeated characters.
+     * For example, the string aabcccccaaa would become a2b1c5a3. If the "compressed" string would not become
+     * smaller than the original string, your method should return the original string.
+     * You can assume the string has only uppercase and lowercase letters (a-z).
+     */
+    public String stringCompression(String str) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (int i=0; i<str.length(); i++) {
+            count++;
+            if (i+1 >= str.length() || str.charAt(i) != str.charAt(i+1)) {
+                sb.append(str.charAt(i)).append(count);
+                count = 0;
+            }
+        }
+        return sb.length() < str.length() ? sb.toString() : str;
+    }
+
 }

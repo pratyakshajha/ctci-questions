@@ -188,4 +188,18 @@ class ArrayProblemsTest {
         assertTrue(problems.oneAway("p", ""));
         assertTrue(problems.oneAway("", "p"));
     }
+
+    @Test
+    void stringCompression() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test cases for compression
+        assertEquals("a2b1c5a3", problems.stringCompression("aabcccccaaa"));
+        assertEquals("a5", problems.stringCompression("aaaaa"));
+
+        // Test cases where original string is returned (compressed is not smaller)
+        assertEquals("abc", problems.stringCompression("abc"));
+        assertEquals("aa", problems.stringCompression("aa"));
+        assertEquals("", problems.stringCompression(""));
+    }
 }

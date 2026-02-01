@@ -202,4 +202,110 @@ class ArrayProblemsTest {
         assertEquals("aa", problems.stringCompression("aa"));
         assertEquals("", problems.stringCompression(""));
     }
+
+    @Test
+    void rotate() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test Case 1: 3x3 matrix
+        int[][] matrix1 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        int[][] expected1 = {
+                {7, 4, 1},
+                {8, 5, 2},
+                {9, 6, 3}
+        };
+        problems.rotate(matrix1);
+        assertArrayEquals(expected1, matrix1);
+
+        // Test Case 2: 4x4 matrix
+        int[][] matrix2 = {
+                {1,  2,  3,  4},
+                {5,  6,  7,  8},
+                {9,  10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        int[][] expected2 = {
+                {13, 9,  5, 1},
+                {14, 10, 6, 2},
+                {15, 11, 7, 3},
+                {16, 12, 8, 4}
+        };
+        problems.rotate(matrix2);
+        assertArrayEquals(expected2, matrix2);
+
+        // Test Case 3: 1x1 matrix
+        int[][] matrix3 = {{1}};
+        int[][] expected3 = {{1}};
+        problems.rotate(matrix3);
+        assertArrayEquals(expected3, matrix3);
+
+        // Test Case 4: 2x2 matrix
+        int[][] matrix4 = {
+                {1, 2},
+                {3, 4}
+        };
+        int[][] expected4 = {
+                {3, 1},
+                {4, 2}
+        };
+        problems.rotate(matrix4);
+        assertArrayEquals(expected4, matrix4);
+    }
+
+    @Test
+    void rotate2() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test Case 1: 3x3 matrix
+        int[][] matrix1 = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        int[][] expected1 = {
+                {7, 4, 1},
+                {8, 5, 2},
+                {9, 6, 3}
+        };
+        problems.rotate2(matrix1);
+        assertArrayEquals(expected1, matrix1);
+
+        // Test Case 2: 4x4 matrix
+        int[][] matrix2 = {
+                {1,  2,  3,  4},
+                {5,  6,  7,  8},
+                {9,  10, 11, 12},
+                {13, 14, 15, 16}
+        };
+        int[][] expected2 = {
+                {13, 9,  5, 1},
+                {14, 10, 6, 2},
+                {15, 11, 7, 3},
+                {16, 12, 8, 4}
+        };
+        problems.rotate2(matrix2);
+        assertArrayEquals(expected2, matrix2);
+
+        // Test Case 3: 1x1 matrix
+        int[][] matrix3 = {{1}};
+        int[][] expected3 = {{1}};
+        problems.rotate2(matrix3);
+        assertArrayEquals(expected3, matrix3);
+
+        // Test Case 4: 2x2 matrix
+        int[][] matrix4 = {
+                {1, 2},
+                {3, 4}
+        };
+        int[][] expected4 = {
+                {3, 1},
+                {4, 2}
+        };
+        problems.rotate2(matrix4);
+        assertArrayEquals(expected4, matrix4);
+    }
 }

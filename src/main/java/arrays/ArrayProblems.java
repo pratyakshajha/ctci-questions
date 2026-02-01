@@ -161,4 +161,66 @@ public class ArrayProblems {
         return sb.length() < str.length() ? sb.toString() : str;
     }
 
+    /**
+     * CTCI 1.7: Rotate Matrix: Given an image represented by an NxN matrix, where each pixel
+     * in the image is 4 bytes, write a method to rotate the image by 90 degrees. Can you do
+     * this in place?
+     */
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int r=0; r<n/2; r++) {
+            int last = n-r-1;
+            for (int c=r; c<last; c++) {
+                int offset = c-r;
+                int temp = matrix[r][c]; // top
+
+                // top becomes left
+                // stay on row r, move across columns from c (top)
+                // stay on column r, moves up the rows (left)
+                matrix[r][c] = matrix[last-offset][r];
+
+                // left becomes bottom
+                // stay on row last, move backward across columns (bottom)
+                matrix[last-offset][r] = matrix[last][last-offset];
+
+                // bottom becomes right
+                // stay on column last, move down the rows (right)
+                matrix[last][last-offset] = matrix[c][last];
+
+                // top becomes right
+                // stay on column last, move backward across rows (top)
+                matrix[c][last] = temp;
+            }
+        }
+    }
+
+    // transpose the matrix
+    // reverse elements of each row
+    public void rotate2(int[][] matrix) {
+        int n = matrix.length;
+
+        // transpose
+        for (int r=0; r<n; r++) {
+            for (int c=r; c<n; c++) {
+                // exchange row and column
+                int temp = matrix[r][c];
+                matrix[r][c] = matrix[c][r];
+                matrix[c][r] = temp;
+            }
+        }
+
+        // reverse each row
+        for (int r=0; r<n; r++) {
+            for (int c=0; c<n/2; c++) {
+                // exchange first with last
+                int temp = matrix[r][c];
+                matrix[r][c] = matrix[r][n-c-1];
+                matrix[r][n-c-1] = temp;
+            }
+        }
+    }
+
+
+
+
 }

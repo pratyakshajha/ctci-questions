@@ -308,4 +308,95 @@ class ArrayProblemsTest {
         problems.rotate2(matrix4);
         assertArrayEquals(expected4, matrix4);
     }
+
+    @Test
+    void zero() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test Case 1: Matrix with one zero
+        int[][] matrix1 = {
+                {1, 2, 3},
+                {4, 0, 6},
+                {7, 8, 9}
+        };
+        int[][] expected1 = {
+                {1, 0, 3},
+                {0, 0, 0},
+                {7, 0, 9}
+        };
+        problems.zero(matrix1);
+        assertArrayEquals(expected1, matrix1);
+
+        // Test Case 2: Matrix with multiple zeros
+        int[][] matrix2 = {
+                {1, 0, 3},
+                {4, 5, 6},
+                {0, 8, 9}
+        };
+        int[][] expected2 = {
+                {0, 0, 0},
+                {0, 0, 6},
+                {0, 0, 0}
+        };
+        problems.zero(matrix2);
+        assertArrayEquals(expected2, matrix2);
+
+        // Test Case 3: Matrix with no zeros
+        int[][] matrix3 = {
+                {1, 2},
+                {3, 4}
+        };
+        int[][] expected3 = {
+                {1, 2},
+                {3, 4}
+        };
+        problems.zero(matrix3);
+        assertArrayEquals(expected3, matrix3);
+
+        // Test Case 4: Matrix with all zeros
+        int[][] matrix4 = {
+                {0, 0},
+                {0, 0}
+        };
+        int[][] expected4 = {
+                {0, 0},
+                {0, 0}
+        };
+        problems.zero(matrix4);
+        assertArrayEquals(expected4, matrix4);
+
+        // Test Case 5: Rectangular matrix (M != N)
+        int[][] matrix5 = {
+                {1, 2, 3, 4},
+                {5, 0, 7, 8},
+                {9, 10, 11, 12}
+        };
+        int[][] expected5 = {
+                {1, 0, 3, 4},
+                {0, 0, 0, 0},
+                {9, 0, 11, 12}
+        };
+        problems.zero(matrix5);
+        assertArrayEquals(expected5, matrix5);
+    }
+
+    @Test
+    void isRotation() {
+        ArrayProblems problems = new ArrayProblems();
+
+        // Test cases for rotations
+        assertTrue(problems.isRotation("waterbottle", "erbottlewat"));
+        assertTrue(problems.isRotation("abcde", "cdeab"));
+        assertTrue(problems.isRotation("a", "a"));
+        assertTrue(problems.isRotation("", ""));
+
+        // Test cases for non-rotations
+        assertFalse(problems.isRotation("waterbottle", "erbottlewaa"));
+        assertFalse(problems.isRotation("abcde", "abced"));
+        assertFalse(problems.isRotation("hello", "world"));
+
+        // Test cases for different lengths
+        assertFalse(problems.isRotation("abc", "abcd"));
+        assertFalse(problems.isRotation("abcd", "abc"));
+    }
 }

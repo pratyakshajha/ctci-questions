@@ -1,6 +1,8 @@
 package arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ArrayProblems {
 
@@ -220,7 +222,44 @@ public class ArrayProblems {
         }
     }
 
+    /**
+     * CTCI 1.8: Zero Matrix: Write an algorithm such that if an element in an MxN matrix is 0,
+     * its entire row and column are set to 0.
+     */
+    public void zero(int[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        // find indices of where the zeros are
+        boolean[] rows = new boolean[m];
+        boolean[] cols = new boolean[n];
+        for (int r=0; r<m; r++) {
+            for (int c=0; c<n; c++) {
+                if (matrix[r][c] == 0) {
+                    rows[r] = true;
+                    cols[c] = true;
+                }
+            }
+        }
 
+        // populate zeros
+        for (int r=0; r<m; r++) {
+            if (rows[r])
+                for (int i=0; i<n; i++) matrix[r][i] = 0;
+        }
+        for (int c=0; c<n; c++) {
+            if (cols[c])
+                for (int i=0; i<m; i++) matrix[i][c] = 0;
+        }
+    }
 
+    /**
+     * CTCI 1.9: String Rotation: Assume you have a method isSubstring which checks if one word is a substring
+     * of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one
+     * call to isSubstring (e.g., "waterbottle" is a rotation of "erbottlewat").
+     */
+    public boolean isRotation(String s1, String s2) {
+        if (s1.length() != s2.length()) return false;
+        String s1s1 = s1+s1;
+        return s1s1.contains(s2);
+    }
 
 }

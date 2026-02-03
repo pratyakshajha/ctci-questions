@@ -83,6 +83,62 @@ public class LinkedListProblems {
     }
 
     /**
+     * CTCI 2.4: Partition: Write code to partition a linked list around a value x, such that
+     * all nodes less than x come before all nodes greater than or equal to x. If x is contained
+     * within the list, the values of x only need to be after the elements less than x.
+     */
+    public Node<Integer> partition(Node<Integer> node, int x) {
+        if (node == null) return null;
+
+        Node<Integer> head = null;
+        Node<Integer> tail = null;
+        while (node != null) {
+            Node<Integer> next = node.next;
+            // insert node at head
+            if (node.value < x) {
+                node.next = head;
+                head = node;
+            }
+            // insert node at tail
+            else {
+                node.next = tail;
+                tail = node;
+            }
+            node = next;
+        }
+        if (head == null) return tail;
+
+        Node<Integer> current = head;
+        while(current.next != null) current = current.next;
+        current.next = tail;
+        return head;
+    }
+
+    // maintain order
+    public Node<Integer> partition2(Node<Integer> node, int x) {
+        Node<Integer> beforeDummy = new Node<>(-1);
+        Node<Integer> afterDummy = new Node<>(-1);
+
+        Node<Integer> before = beforeDummy;
+        Node<Integer> after = afterDummy;
+
+        while (node != null) {
+            if (node.value < x) {
+                before.next = node;
+                before = before.next;
+            } else {
+                after.next = node;
+                after = after.next;
+            }
+            node = node.next;
+        }
+
+        after.next = null;
+        before.next = afterDummy.next;
+        return beforeDummy.next;
+    }
+
+    /**
      * CTCI 2.6: Palindrome: Implement a function to check if a linked list is a palindrome.
      */
     public <T> boolean isPalindrome(Node<T> head) {

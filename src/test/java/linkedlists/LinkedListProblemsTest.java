@@ -239,6 +239,144 @@ class LinkedListProblemsTest {
     }
 
     @Test
+    void partition() {
+        LinkedListProblems problems = new LinkedListProblems();
+
+        // Test case 1: Empty list
+        assertNull(problems.partition(null, 5));
+
+        // Test case 2: Single element list
+        Node<Integer> head1 = new Node<>(10);
+        assertEquals("[ 10 ]", Node.printAsList(problems.partition(head1, 5)));
+
+        // Test case 3: All elements smaller than x
+        Node<Integer> head2 = new Node<>(1);
+        head2.next = new Node<>(2);
+        head2.next.next = new Node<>(3);
+        // Result order might change due to head insertion, but all should be present
+        String result2 = Node.printAsList(problems.partition(head2, 5));
+        assertTrue(result2.contains("1") && result2.contains("2") && result2.contains("3"));
+
+        // Test case 4: All elements larger than x
+        Node<Integer> head3 = new Node<>(8);
+        head3.next = new Node<>(10);
+        head3.next.next = new Node<>(7);
+        String result3 = Node.printAsList(problems.partition(head3, 5));
+        assertTrue(result3.contains("8") && result3.contains("10") && result3.contains("7"));
+
+        // Test case 5: Mixed elements
+        Node<Integer> head4 = new Node<>(3);
+        head4.next = new Node<>(5);
+        head4.next.next = new Node<>(8);
+        head4.next.next.next = new Node<>(5);
+        head4.next.next.next.next = new Node<>(10);
+        head4.next.next.next.next.next = new Node<>(2);
+        head4.next.next.next.next.next.next = new Node<>(1);
+
+        Node<Integer> partitioned = problems.partition(head4, 5);
+        boolean foundGreater = false;
+        Node<Integer> curr = partitioned;
+        while (curr != null) {
+            if (curr.value >= 5) {
+                foundGreater = true;
+            } else {            }
+            curr = curr.next;
+        }
+        assertTrue(foundGreater);
+
+        // Test case 6: Verify partition logic (elements < 5 before elements >= 5)
+        Node<Integer> head5 = new Node<>(3);
+        head5.next = new Node<>(5);
+        head5.next.next = new Node<>(8);
+        head5.next.next.next = new Node<>(2);
+        head5.next.next.next.next = new Node<>(1);
+
+        Node<Integer> result5 = problems.partition(head5, 5);
+        boolean foundGreaterOrEqual = false;
+        Node<Integer> current = result5;
+        while (current != null) {
+            if (current.value >= 5) {
+                foundGreaterOrEqual = true;
+            } else {
+                if (foundGreaterOrEqual) {
+                    fail("Found an element less than partition value after an element greater than or equal to it");
+                }
+            }
+            current = current.next;
+        }
+        assertTrue(foundGreaterOrEqual);
+    }
+
+    @Test
+    void partition2() {
+        LinkedListProblems problems = new LinkedListProblems();
+
+        // Test case 1: Empty list
+        assertNull(problems.partition2(null, 5));
+
+        // Test case 2: Single element list
+        Node<Integer> head1 = new Node<>(10);
+        assertEquals("[ 10 ]", Node.printAsList(problems.partition2(head1, 5)));
+
+        // Test case 3: All elements smaller than x
+        Node<Integer> head2 = new Node<>(1);
+        head2.next = new Node<>(2);
+        head2.next.next = new Node<>(3);
+        // Result order might change due to head insertion, but all should be present
+        String result2 = Node.printAsList(problems.partition2(head2, 5));
+        assertTrue(result2.contains("1") && result2.contains("2") && result2.contains("3"));
+
+        // Test case 4: All elements larger than x
+        Node<Integer> head3 = new Node<>(8);
+        head3.next = new Node<>(10);
+        head3.next.next = new Node<>(7);
+        String result3 = Node.printAsList(problems.partition2(head3, 5));
+        assertTrue(result3.contains("8") && result3.contains("10") && result3.contains("7"));
+
+        // Test case 5: Mixed elements
+        Node<Integer> head4 = new Node<>(3);
+        head4.next = new Node<>(5);
+        head4.next.next = new Node<>(8);
+        head4.next.next.next = new Node<>(5);
+        head4.next.next.next.next = new Node<>(10);
+        head4.next.next.next.next.next = new Node<>(2);
+        head4.next.next.next.next.next.next = new Node<>(1);
+
+        Node<Integer> partitioned = problems.partition2(head4, 5);
+        boolean foundGreater = false;
+        Node<Integer> curr = partitioned;
+        while (curr != null) {
+            if (curr.value >= 5) {
+                foundGreater = true;
+            } else {            }
+            curr = curr.next;
+        }
+        assertTrue(foundGreater);
+
+        // Test case 6: Verify partition logic (elements < 5 before elements >= 5)
+        Node<Integer> head5 = new Node<>(3);
+        head5.next = new Node<>(5);
+        head5.next.next = new Node<>(8);
+        head5.next.next.next = new Node<>(2);
+        head5.next.next.next.next = new Node<>(1);
+
+        Node<Integer> result5 = problems.partition2(head5, 5);
+        boolean foundGreaterOrEqual = false;
+        Node<Integer> current = result5;
+        while (current != null) {
+            if (current.value >= 5) {
+                foundGreaterOrEqual = true;
+            } else {
+                if (foundGreaterOrEqual) {
+                    fail("Found an element less than partition value after an element greater than or equal to it");
+                }
+            }
+            current = current.next;
+        }
+        assertTrue(foundGreaterOrEqual);
+    }
+
+    @Test
     void isPalindrome() {
         LinkedListProblems problems = new LinkedListProblems();
 

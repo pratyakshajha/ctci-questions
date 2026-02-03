@@ -2,6 +2,10 @@ package graphs;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GraphProblemsTest {
@@ -166,5 +170,55 @@ class GraphProblemsTest {
 
         // Test Case 10: Null grid
         assertFalse(problems.findPathDfs(null, start1, end1));
+    }
+
+    @Test
+    void findBuildOrder() {
+        GraphProblems problems = new GraphProblems();
+
+        // Test Case 1: Standard build order
+        String[] projects1 = {"a", "b", "c", "d", "e", "f"};
+        String[][] dependencies1 = {{"a", "d"}, {"f", "b"}, {"b", "d"}, {"f", "a"}, {"d", "c"}};
+        List<String> result1 = problems.findBuildOrder(projects1, dependencies1);
+        assertNotNull(result1);
+        assertEquals(6, result1.size());
+        // Verify dependencies: f before a, f before b, a before d, b before d, d before c
+        assertTrue(result1.indexOf("f") < result1.indexOf("a"));
+        assertTrue(result1.indexOf("f") < result1.indexOf("b"));
+        assertTrue(result1.indexOf("a") < result1.indexOf("d"));
+        assertTrue(result1.indexOf("b") < result1.indexOf("d"));
+        assertTrue(result1.indexOf("d") < result1.indexOf("c"));
+
+        // Test Case 2: No dependencies
+        String[] projects2 = {"a", "b", "c"};
+        String[][] dependencies2 = {};
+        List<String> result2 = problems.findBuildOrder(projects2, dependencies2);
+        assertEquals(3, result2.size());
+        assertTrue(result2.containsAll(Arrays.asList("a", "b", "c")));
+
+        // Test Case 3: Linear dependency
+        String[] projects3 = {"a", "b", "c"};
+        String[][] dependencies3 = {{"a", "b"}, {"b", "c"}};
+        List<String> result3 = problems.findBuildOrder(projects3, dependencies3);
+        assertEquals(Arrays.asList("a", "b", "c"), result3);
+
+        // Test Case 4: Disconnected components
+        String[] projects4 = {"a", "b", "c", "d"};
+        String[][] dependencies4 = {{"a", "b"}, {"c", "d"}};
+        List<String> result4 = problems.findBuildOrder(projects4, dependencies4);
+        assertTrue(result4.indexOf("a") < result4.indexOf("b"));
+        assertTrue(result4.indexOf("c") < result4.indexOf("d"));
+        assertEquals(4, result4.size());
+
+        // Test Case 5: Single project
+        String[] projects5 = {"a"};
+        String[][] dependencies5 = {};
+        List<String> result5 = problems.findBuildOrder(projects5, dependencies5);
+        assertEquals(Collections.singletonList("a"), result5);
+
+        // Test Case 6: Dependency with cycles
+        String[] projects6 = {"a", "b", "c"};
+        String[][] dependencies6 = {{"a", "b"}, {"b", "c"}, {"c", "a"}};
+        assertThrows(RuntimeException.class, () -> problems.findBuildOrder(projects6, dependencies6));
     }
 }

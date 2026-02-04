@@ -139,6 +139,32 @@ public class LinkedListProblems {
     }
 
     /**
+     * CTCI 2.5: Sum Lists: You have two numbers represented by a linked list, where each node contains a single
+     * digit. The digits are stored in reverse order, such that the 1 's digit is at the head of the list. Write a
+     * function that adds the two numbers and returns the sum as a linked list.
+     */
+    public Node<Integer> sumLists(Node<Integer> h1, Node<Integer> h2) {
+        int carry = 0;
+        Node<Integer> dummy = new Node<>(-1);
+        Node<Integer> node = dummy;
+
+        while (h1 != null || h2 != null) {
+            int d1 = h1 != null ? h1.value : 0;
+            int d2 = h2 != null ? h2.value : 0;
+            int sum = d1 + d2 + carry;
+            int digit = sum%10;
+            carry = sum/10;
+            node.next = new Node<>(digit);
+            node = node.next;
+            h1 = h1 != null ? h1.next : null;
+            h2 = h2 != null ? h2.next : null;
+        }
+        if (carry != 0) node.next = new Node<>(carry);
+
+        return dummy.next;
+    }
+
+    /**
      * CTCI 2.6: Palindrome: Implement a function to check if a linked list is a palindrome.
      */
     public <T> boolean isPalindrome(Node<T> head) {

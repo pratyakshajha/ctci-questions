@@ -164,6 +164,29 @@ public class LinkedListProblems {
         return dummy.next;
     }
 
+    // recursive
+    public Node<Integer> sumLists2(Node<Integer> h1, Node<Integer> h2) {
+        Node<Integer> dummy = new Node<>(-1);
+        sumListsRecursive(h1, h2, 0, dummy);
+        return dummy.next;
+    }
+
+    public Node<Integer> sumListsRecursive(Node<Integer> h1, Node<Integer> h2, int carry, Node<Integer> result) {
+        if (h1 == null && h2 == null && carry == 0) return null;
+
+        int d1 = h1 != null ? h1.value : 0;
+        int d2 = h2 != null ? h2.value : 0;
+        int sum = d1 + d2 + carry;
+        int digit = sum % 10;
+        carry = sum / 10;
+        result.next = new Node<>(digit);
+        return sumListsRecursive(h1 != null ? h1.next : null,
+                h2 != null ? h2.next : null,
+                carry,
+                result.next
+        );
+    }
+
     /**
      * CTCI 2.6: Palindrome: Implement a function to check if a linked list is a palindrome.
      */

@@ -418,6 +418,45 @@ class LinkedListProblemsTest {
     }
 
     @Test
+    void sumLists2() {
+        LinkedListProblems problems = new LinkedListProblems();
+
+        // Test case 1: 617 + 295 = 912
+        Node<Integer> h1 = new Node<>(7);
+        h1.next = new Node<>(1);
+        h1.next.next = new Node<>(6);
+
+        Node<Integer> h2 = new Node<>(5);
+        h2.next = new Node<>(9);
+        h2.next.next = new Node<>(2);
+
+        Node<Integer> result = problems.sumLists2(h1, h2);
+        assertEquals("[ 2-> 1-> 9 ]", Node.printAsList(result));
+
+        // Test case 2: Different lengths (99 + 1 = 100)
+        Node<Integer> h3 = new Node<>(9);
+        h3.next = new Node<>(9);
+
+        Node<Integer> h4 = new Node<>(1);
+
+        Node<Integer> result2 = problems.sumLists2(h3, h4);
+        assertEquals("[ 0-> 0-> 1 ]", Node.printAsList(result2));
+
+        // Test case 3: Carry at the end (5 + 5 = 10)
+        Node<Integer> h5 = new Node<>(5);
+        Node<Integer> h6 = new Node<>(5);
+        assertEquals("[ 0-> 1 ]", Node.printAsList(problems.sumLists2(h5, h6)));
+
+        // Test case 4: One list is null
+        Node<Integer> h7 = new Node<>(1);
+        h7.next = new Node<>(2);
+        assertEquals("[ 1-> 2 ]", Node.printAsList(problems.sumLists2(h7, new Node<>(0))));
+        assertEquals("[ 1-> 2 ]", Node.printAsList(problems.sumLists2(new Node<>(0), h7)));
+        // Test case 5: Both lists are null
+        assertNull(problems.sumLists2(null, null));
+    }
+
+    @Test
     void isPalindrome() {
         LinkedListProblems problems = new LinkedListProblems();
 

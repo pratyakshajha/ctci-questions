@@ -7,6 +7,61 @@ import static org.junit.jupiter.api.Assertions.*;
 class BinaryTreeProblemsTest {
 
     @Test
+    void findSuccessor() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Empty tree
+        assertNull(problems.findSuccessor(null));
+
+        // Test Case 2: Tree with only root, no left child
+        Node<Integer> root1 = new Node<>(10);
+        assertEquals(root1, problems.findSuccessor(root1));
+
+        // Test Case 3: Tree with left child
+        Node<Integer> root2 = new Node<>(20);
+        Node<Integer> left2 = new Node<>(10);
+        root2.left = left2;
+        assertEquals(left2, problems.findSuccessor(root2));
+
+        // Test Case 4: Tree with multiple left children
+        Node<Integer> root3 = new Node<>(30);
+        Node<Integer> left3_1 = new Node<>(15);
+        Node<Integer> left3_2 = new Node<>(5);
+        root3.left = left3_1;
+        left3_1.left = left3_2;
+        assertEquals(left3_2, problems.findSuccessor(root3));
+
+        // Test Case 5: Complex tree, find min in right subtree
+        Node<Integer> root4 = new Node<>(50);
+        root4.left = new Node<>(30);
+        root4.right = new Node<>(70);
+        root4.left.left = new Node<>(20);
+        root4.left.right = new Node<>(40);
+        root4.right.left = new Node<>(60);
+        root4.right.right = new Node<>(80);
+        assertEquals(root4.left.left, problems.findSuccessor(root4.left)); // Successor of 30 is 20 (min in its right subtree)
+        assertEquals(root4.right.left, problems.findSuccessor(root4.right)); // Successor of 70 is 60 (min in its right subtree)
+        assertEquals(root4.left.left, problems.findSuccessor(root4)); // Successor of 50 is 20 (min in its right subtree)
+
+        // Test Case 6: Node with no left child
+        Node<Integer> root6 = new Node<>(100);
+        assertEquals(root6, problems.findSuccessor(root6));
+
+        // Test Case 7: Node with only right child (still finds itself if no left)
+        Node<Integer> root7 = new Node<>(100);
+        root7.right = new Node<>(110);
+        assertEquals(root7, problems.findSuccessor(root7));
+
+        // Test Case 8: String data type
+        Node<String> root8 = new Node<>("apple");
+        Node<String> left8_1 = new Node<>("banana");
+        Node<String> left8_2 = new Node<>("apricot");
+        root8.left = left8_1;
+        left8_1.left = left8_2;
+        assertEquals(left8_2, problems.findSuccessor(root8));
+    }
+
+    @Test
     void lowestCommonAncestor() {
         BinaryTreeProblems problems = new BinaryTreeProblems();
 
@@ -196,60 +251,5 @@ class BinaryTreeProblemsTest {
         Node<Integer> root4 = new Node<>(1);
         Node<Integer> p4 = new Node<>(1);
         assertFalse(problems.contains(root4, p4)); // Should be false as it's a different object
-    }
-
-    @Test
-    void findSuccessor() {
-        BinaryTreeProblems problems = new BinaryTreeProblems();
-
-        // Test Case 1: Empty tree
-        assertNull(problems.findSuccessor(null));
-
-        // Test Case 2: Tree with only root, no left child
-        Node<Integer> root1 = new Node<>(10);
-        assertEquals(root1, problems.findSuccessor(root1));
-
-        // Test Case 3: Tree with left child
-        Node<Integer> root2 = new Node<>(20);
-        Node<Integer> left2 = new Node<>(10);
-        root2.left = left2;
-        assertEquals(left2, problems.findSuccessor(root2));
-
-        // Test Case 4: Tree with multiple left children
-        Node<Integer> root3 = new Node<>(30);
-        Node<Integer> left3_1 = new Node<>(15);
-        Node<Integer> left3_2 = new Node<>(5);
-        root3.left = left3_1;
-        left3_1.left = left3_2;
-        assertEquals(left3_2, problems.findSuccessor(root3));
-
-        // Test Case 5: Complex tree, find min in right subtree
-        Node<Integer> root4 = new Node<>(50);
-        root4.left = new Node<>(30);
-        root4.right = new Node<>(70);
-        root4.left.left = new Node<>(20);
-        root4.left.right = new Node<>(40);
-        root4.right.left = new Node<>(60);
-        root4.right.right = new Node<>(80);
-        assertEquals(root4.left.left, problems.findSuccessor(root4.left)); // Successor of 30 is 20 (min in its right subtree)
-        assertEquals(root4.right.left, problems.findSuccessor(root4.right)); // Successor of 70 is 60 (min in its right subtree)
-        assertEquals(root4.left.left, problems.findSuccessor(root4)); // Successor of 50 is 20 (min in its right subtree)
-
-        // Test Case 6: Node with no left child
-        Node<Integer> root6 = new Node<>(100);
-        assertEquals(root6, problems.findSuccessor(root6));
-
-        // Test Case 7: Node with only right child (still finds itself if no left)
-        Node<Integer> root7 = new Node<>(100);
-        root7.right = new Node<>(110);
-        assertEquals(root7, problems.findSuccessor(root7));
-
-        // Test Case 8: String data type
-        Node<String> root8 = new Node<>("apple");
-        Node<String> left8_1 = new Node<>("banana");
-        Node<String> left8_2 = new Node<>("apricot");
-        root8.left = left8_1;
-        left8_1.left = left8_2;
-        assertEquals(left8_2, problems.findSuccessor(root8));
     }
 }

@@ -73,13 +73,13 @@ public class BinaryTreeProblems {
     // recursive
     public <T> List<LinkedList<Node<T>>> listOfDepths3(Node<T> root) {
         if (root == null) return null;
-        
+
         List<LinkedList<Node<T>>> result = new ArrayList<>();
-        helper(root, 0, result);
+        listOfDepths3Helper(root, 0, result);
         return result;
     }
 
-    public <T> void helper(Node<T> root, int level, List<LinkedList<Node<T>>> result) {
+    public <T> void listOfDepths3Helper(Node<T> root, int level, List<LinkedList<Node<T>>> result) {
         if (root == null) return;
 
         LinkedList<Node<T>> list = null;
@@ -90,8 +90,8 @@ public class BinaryTreeProblems {
             list = result.get(level);
         }
         list.add(root);
-        helper(root.left, level+1, result);
-        helper(root.right, level+1, result);
+        listOfDepths3Helper(root.left, level+1, result);
+        listOfDepths3Helper(root.right, level+1, result);
     }
 
     /**

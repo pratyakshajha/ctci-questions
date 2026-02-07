@@ -1,6 +1,12 @@
 name: Run Java Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - template
+  pull_request:
+    branches-ignore:
+      - template
 
 jobs:
   run-tests:

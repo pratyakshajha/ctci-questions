@@ -18,6 +18,18 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     testLogging {
+        showStandardStreams = true
         events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+    afterSuite { desc, result ->
+        if (!desc.parent) {
+            println "\n"
+            println "--------------------------------------------------------------"
+            println "Results: ${result.resultType} (${result.testCount} tests, " +
+                    "${result.successfulTestCount} passed, " +
+                    "${result.failedTestCount} failed, " +
+                    "${result.skippedTestCount} skipped)"
+            println "--------------------------------------------------------------\n"
+        }
     }
 }

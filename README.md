@@ -39,6 +39,21 @@ allowing you to write your own solutions and validate them immediately.
 | Binary Tree Node | `src/main/java/binarytrees/Node.java` | Generic `Node<T>` class with a `toString()` override for pretty-printing the tree structure to the console. |
 | Linked List Node | `src/main/java/linkedlists/Node.java` | Generic `Node<T>` class with a `printAsList()` static method for easy visualization. |
 
+### Chapter 1: Arrays and Strings
+*Solutions are in `src/main/java/arrays/ArrayProblems.java`*
+
+| Problem | Method | Key Concepts |
+| :--- | :--- | :--- |
+| 1.1 Is Unique | `isUnique` | Bit manipulation, boolean array. |
+| 1.2 Check Permutation | `isPermutation` | Character count array, sorting. |
+| 1.3 URLify | `urlify` | Two-pointer string manipulation. |
+| 1.4 Palindrome Permutation | `isPalindromePermutation` | Bit vector, character count map. |
+| 1.5 One Away | `oneAway` | Single-pass string comparison. |
+| 1.6 String Compression | `stringCompression` | String building, character counting. |
+| 1.7 Rotate Matrix | `rotate`, `rotate2` | In-place rotation, matrix transpose. |
+| 1.8 Zero Matrix | `zero` | Using boolean arrays to track zero rows/columns. |
+| 1.9 String Rotation | `isRotation` | String concatenation and `isSubstring` check. |
+
 ### Chapter 2: Linked Lists
 *Solutions are in `src/main/java/linkedlists/LinkedListProblems.java`*
 
@@ -48,6 +63,8 @@ allowing you to write your own solutions and validate them immediately.
 | 2.1 Remove Dups | `removeDuplicatesNoBuffer` | Two Pointers (runner technique) for O(1) space complexity. |
 | 2.2 Return Kth to Last | `kthToLast` | Two Pointers with a fixed `k` distance. |
 | 2.3 Delete Middle Node | `deleteMiddle` | Fast/Slow pointer to find the middle, then relink. |
+| 2.4 Partition | `partition`, `partition2` | Two-pointer list creation, stable/unstable partitioning. |
+| 2.5 Sum Lists | `sumLists`, `sumLists2` | Elementary math, recursion. |
 | 2.6 Palindrome | `isPalindrome` | List reversal (reverse second half) and comparison. |
 | 2.7 Intersection | `findIntersectingNode` | Aligning pointers by list length difference. |
 | 2.8 Loop Detection | `detectLoop` | Floyd's Cycle-Finding Algorithm (Tortoise and Hare). |

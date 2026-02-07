@@ -8,7 +8,7 @@ public class BitManipulationProblems {
      * located at i and ending at j)
      */
     public int updateBits(int n, int m, int i, int j) {
-
+        return -1;
     }
 
     /**
@@ -16,7 +16,7 @@ public class BitManipulationProblems {
      * If the number cannot be represented accurately in binary with at most 32 characters (including the "."), print "ERROR".
      */
     public String printBinary(double number) {
-
+        return "";
     }
 
     /**
@@ -24,7 +24,7 @@ public class BitManipulationProblems {
      * Write code to find the length of the longest sequence of 1s you could create. Example: 110 1110 1111 = 8
      */
     public int flipBit(int n) {
-
+        return -1;
     }
 
 }

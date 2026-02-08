@@ -172,4 +172,61 @@ public class BinaryTreeProblems {
         if (root == node) return true;
         return (contains(root.left, node) || contains(root.right, node));
     }
+    /**
+     * CTCI 4.9: BST Sequences: A binary search tree was created by traversing through an array from left to right
+     * and inserting each element. Given a binary search tree with distinct elements, print all possible arrays that
+     * could have led to this tree.
+     */
+    public <T> List<List<T>> bstSequences(Node<T> root) {
+        List<List<T>> result = new ArrayList<>();
+        if (root == null) {
+            result.add(new ArrayList<>());
+            return result;
+        }
+
+        List<T> prefix = new ArrayList<>();
+        prefix.add(root.data);
+
+        List<List<T>> leftSequence = bstSequences(root.left);
+        List<List<T>> rightSequence = bstSequences(root.right);
+
+        for (List<T> left : leftSequence) {
+            for (List<T> right : rightSequence) {
+                List<List<T>> weaved = new ArrayList<>();
+                weaveLists(left, right, weaved, prefix);
+                result.addAll(weaved);
+            }
+        }
+
+        return result;
+    }
+
+    public <T> void weaveLists(List<T> first, List<T> second,
+                           List<List<T>> results, List<T> prefix) {
+        // if one list is empty, add the other lists to a copy of prefix
+        if (first.isEmpty() || second.isEmpty()) {
+            List<T> result = new ArrayList<>(prefix);
+            result.addAll(first);
+            result.addAll(second);
+            results.add(result);
+            return;
+        }
+
+        // take the head of 'first', add to prefix, and recurse
+        T headFirst = first.remove(0);
+        prefix.add(headFirst);
+        weaveLists(first, second, results, prefix);
+        // backtrack
+        prefix.remove(prefix.size() - 1);
+        first.add(0, headFirst);
+
+        //take the head of 'second', add to prefix, and recurse
+        T headSecond = second.remove(0);
+        prefix.add(headSecond);
+        weaveLists(first, second, results, prefix);
+        // backtrack
+        prefix.remove(prefix.size() - 1);
+        second.add(0, headSecond);
+    }
+
 }

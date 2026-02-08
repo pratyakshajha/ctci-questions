@@ -535,4 +535,62 @@ class BinaryTreeProblemsTest {
         Node<Integer> p4 = new Node<>(1);
         assertFalse(problems.contains(root4, p4)); // Should be false as it's a different object
     }
+
+    @Test
+    void bstSequences() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Single node
+        Node<Integer> root1 = new Node<>(1);
+        List<List<Integer>> result1 = problems.bstSequences(root1);
+        assertEquals(1, result1.size());
+        assertEquals(List.of(1), result1.get(0));
+
+        // Test Case 2: Simple BST
+        //    2
+        //   / \
+        //  1   3
+        Node<Integer> root2 = new Node<>(2);
+        root2.left = new Node<>(1);
+        root2.right = new Node<>(3);
+        List<List<Integer>> result2 = problems.bstSequences(root2);
+        // Possible: [2, 1, 3], [2, 3, 1]
+        assertEquals(2, result2.size());
+        assertTrue(result2.contains(List.of(2, 1, 3)));
+        assertTrue(result2.contains(List.of(2, 3, 1)));
+
+        // Test Case 3: Null root
+        List<List<Integer>> result3 = problems.bstSequences(null);
+        assertEquals(1, result3.size());
+        assertTrue(result3.get(0).isEmpty());
+
+        // Test Case 4: Linear tree (Right only)
+        Node<Integer> root4 = new Node<>(1);
+        root4.right = new Node<>(2);
+        root4.right.right = new Node<>(3);
+        List<List<Integer>> result4 = problems.bstSequences(root4);
+        assertEquals(1, result4.size());
+        assertEquals(List.of(1, 2, 3), result4.get(0));
+
+        // Test Case 5: Complex BST
+        //      10
+        //     /  \
+        //    5    15
+        //   /
+        //  2
+        Node<Integer> root5 = new Node<>(10);
+        root5.left = new Node<>(5);
+        root5.right = new Node<>(15);
+        root5.left.left = new Node<>(2);
+        List<List<Integer>> result5 = problems.bstSequences(root5);
+        // Possible sequences must start with 10.
+        // Then 5 and 15 can be in any order.
+        // 2 must come after 5.
+        // [10, 5, 15, 2], [10, 5, 2, 15], [10, 15, 5, 2]
+        assertEquals(3, result5.size());
+        assertTrue(result5.contains(List.of(10, 5, 15, 2)));
+        assertTrue(result5.contains(List.of(10, 5, 2, 15)));
+        assertTrue(result5.contains(List.of(10, 15, 5, 2)));
+
+    }
 }

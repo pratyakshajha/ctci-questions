@@ -591,6 +591,60 @@ class BinaryTreeProblemsTest {
         assertTrue(result5.contains(List.of(10, 5, 15, 2)));
         assertTrue(result5.contains(List.of(10, 5, 2, 15)));
         assertTrue(result5.contains(List.of(10, 15, 5, 2)));
+    }
 
+    @Test
+    void checkSubtree() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: T2 is a subtree of T1
+        Node<Integer> t1 = new Node<>(1);
+        t1.left = new Node<>(2);
+        t1.right = new Node<>(3);
+        t1.left.left = new Node<>(4);
+        t1.left.right = new Node<>(5);
+
+        Node<Integer> t2 = new Node<>(2);
+        t2.left = new Node<>(4);
+        t2.right = new Node<>(5);
+        assertTrue(problems.checkSubtree(t1, t2));
+
+        // Test Case 2: T2 is not a subtree of T1
+        Node<Integer> t3 = new Node<>(2);
+        t3.left = new Node<>(4);
+        t3.right = new Node<>(6); // Different value
+        assertFalse(problems.checkSubtree(t1, t3));
+
+        // Test Case 3: T2 is null (should be true)
+        assertTrue(problems.checkSubtree(t1, null));
+
+        // Test Case 4: T1 is null, T2 is not (should be false)
+        assertFalse(problems.checkSubtree(null, t2));
+
+        // Test Case 5: T1 and T2 are identical
+        Node<Integer> t1_copy = new Node<>(1);
+        t1_copy.left = new Node<>(2);
+        t1_copy.right = new Node<>(3);
+        t1_copy.left.left = new Node<>(4);
+        t1_copy.left.right = new Node<>(5);
+        assertTrue(problems.checkSubtree(t1, t1_copy));
+
+        // Test Case 6: T2 is larger than T1
+        assertFalse(problems.checkSubtree(t2, t1));
+
+        // Test Case 7: T2 exists in T1 but with different structure
+        Node<Integer> t1_complex = new Node<>(10);
+        t1_complex.left = new Node<>(5);
+        t1_complex.left.left = new Node<>(2);
+        Node<Integer> t2_complex = new Node<>(5);
+        t2_complex.left = new Node<>(2);
+        assertTrue(problems.checkSubtree(t1_complex, t2_complex));
+
+        // Test Case 8: T2 has same values but different leaf structure
+        Node<Integer> t1_leaf = new Node<>(1);
+        t1_leaf.left = new Node<>(2);
+        Node<Integer> t2_leaf = new Node<>(1);
+        t2_leaf.right = new Node<>(2);
+        assertFalse(problems.checkSubtree(t1_leaf, t2_leaf));
     }
 }

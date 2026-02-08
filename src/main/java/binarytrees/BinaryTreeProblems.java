@@ -172,6 +172,7 @@ public class BinaryTreeProblems {
         if (root == node) return true;
         return (contains(root.left, node) || contains(root.right, node));
     }
+
     /**
      * CTCI 4.9: BST Sequences: A binary search tree was created by traversing through an array from left to right
      * and inserting each element. Given a binary search tree with distinct elements, print all possible arrays that
@@ -228,5 +229,34 @@ public class BinaryTreeProblems {
         prefix.remove(prefix.size() - 1);
         second.add(0, headSecond);
     }
+
+    /**
+     * CTCI 4.10: Check Subtree: T1 and T2 are two very large binary trees, with T1 much bigger than T2.
+     * Create an algorithm to determine if T2 is a subtree of T1. A tree T2 is a subtree of T1 if there exists
+     * a node n in T1 such that the subtree of n is identical to T2. That is, if you cut off the tree at node n,
+     * the two trees would be identical.
+     */
+    public <T> boolean checkSubtree(Node<T> root1, Node<T> root2) {
+        if (root2 == null) return true; // null tree is a subtree
+        if (root1 == null) return false;
+
+        // found the root of T2 in T1, match if subtree of T1 == T2
+        if (root1.data == root2.data)
+            return matchTree(root1, root2);
+        // search in left and right subtrees of T1
+        return checkSubtree(root1.left, root2) || checkSubtree(root1.right, root2);
+    }
+
+    public <T> boolean matchTree(Node<T> root1, Node<T> root2) {
+        if (root1 == null && root2 == null) return true;
+        // only one of T1 and T2 is null, hence unequal
+        if (root1 == null || root2 == null) return false;
+        // data is not equal
+        if (root1.data != root2.data) return false;
+        // validate the left and right subtrees
+        return matchTree(root1.left, root2.left) && matchTree(root1.right, root2.right);
+    }
+
+
 
 }

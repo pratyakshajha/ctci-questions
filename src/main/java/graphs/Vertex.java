@@ -1,7 +1,9 @@
 package binarytrees;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Vertex<T> {
     public T data;
@@ -26,4 +28,14 @@ public class Vertex<T> {
         destination.adjacencyList.remove(this);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Vertex<?> vertex)) return false;
+        return Objects.equals(data, vertex.data) && Objects.equals(adjacencyList, vertex.adjacencyList) && Objects.deepEquals(adjacents, vertex.adjacents);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data, adjacencyList, Arrays.hashCode(adjacents));
+    }
 }

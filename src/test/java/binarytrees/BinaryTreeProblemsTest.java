@@ -647,4 +647,57 @@ class BinaryTreeProblemsTest {
         t2_leaf.right = new Node<>(2);
         assertFalse(problems.checkSubtree(t1_leaf, t2_leaf));
     }
+
+    @Test
+    void pathSum() {
+        BinaryTreeProblems problems = new BinaryTreeProblems();
+
+        // Test Case 1: Simple tree with multiple paths
+        //      10
+        //     /  \
+        //    5   -3
+        //   / \    \
+        //  3   2   11
+        // / \   \
+        //3  -2   1
+        Node<Integer> root1 = new Node<>(10);
+        root1.left = new Node<>(5);
+        root1.right = new Node<>(-3);
+        root1.left.left = new Node<>(3);
+        root1.left.right = new Node<>(2);
+        root1.right.right = new Node<>(11);
+        root1.left.left.left = new Node<>(3);
+        root1.left.left.right = new Node<>(-2);
+        root1.left.right.right = new Node<>(1);
+
+        // Paths summing to 8:
+        // 1. 5 -> 3
+        // 2. 5 -> 2 -> 1
+        // 3. 10 -> 5 -> 3 -> -2 (Wait, 10+5+3-2 = 16. Let's re-check)
+        // Correct paths for target 8: [5, 3], [5, 2, 1], [10, -3]
+        assertEquals(3, problems.pathSum(root1, 8));
+
+        // Test Case 2: Target sum not present
+        assertEquals(0, problems.pathSum(root1, 50));
+
+        // Test Case 3: Single node matches target
+        Node<Integer> root2 = new Node<>(5);
+        assertEquals(1, problems.pathSum(root2, 5));
+
+        // Test Case 4: Empty tree
+        assertEquals(0, problems.pathSum(null, 8));
+
+        // Test Case 5: Path can be just one node in the middle
+        Node<Integer> root5 = new Node<>(1);
+        root5.left = new Node<>(2);
+        root5.left.left = new Node<>(3);
+        assertEquals(1, problems.pathSum(root5, 2));
+
+        // Test Case 6: Negative values
+        Node<Integer> root6 = new Node<>(10);
+        root6.left = new Node<>(-5);
+        root6.left.left = new Node<>(3);
+        // Path: 10 -> -5 -> 3 = 8
+        assertEquals(1, problems.pathSum(root6, 8));
+    }
 }

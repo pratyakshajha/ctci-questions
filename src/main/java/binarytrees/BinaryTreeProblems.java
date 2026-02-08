@@ -257,6 +257,27 @@ public class BinaryTreeProblems {
         return matchTree(root1.left, root2.left) && matchTree(root1.right, root2.right);
     }
 
+    /**
+     * CTCI 4.12: Paths with Sum: You are given a binary tree in which each node contains an integer value
+     * (which might be positive or negative). Design an algorithm to count the number of paths that sum
+     * to a given value. The path does not need to start or end at the root or a leaf, but it must go
+     * downwards (traveling only from parent nodes to child nodes).
+     */
+    public int pathSum(Node<Integer> root, int targetSum) {
+        if (root == null) return 0;
+        return pathSumFromNode(root, targetSum, 0)
+                + pathSum(root.left, targetSum) + pathSum(root.right, targetSum);
+    }
 
+    public int pathSumFromNode(Node<Integer> root, int targetSum, int currentSum) {
+        if (root == null) return 0;
+        currentSum += root.data;
+
+        int totalPaths = 0;
+        if (currentSum == targetSum) totalPaths++;
+        totalPaths += pathSumFromNode(root.left, targetSum, currentSum);
+        totalPaths += pathSumFromNode(root.right, targetSum, currentSum);
+        return totalPaths;
+    }
 
 }

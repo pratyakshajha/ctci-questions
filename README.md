@@ -74,17 +74,17 @@ allowing you to write your own solutions and validate them immediately.
 
 | Problem | Method | Key Concepts |
  | :--- | :--- | :--- |
-| 4.1 Route Between Nodes | `routeBetweenNodes` | Graph Traversal (BFS/DFS) |
-| 4.2 Minimal Tree | `(TBD)` | Recursive construction from sorted array |
-| 4.3 List of Depths | `(TBD)` | Level-order traversal (BFS) |
-| 4.4 Check Balanced | `(TBD)` | Recursive height checking |
-| 4.5 Validate BST | `(TBD)` | In-order traversal or min/max range check |
-| 4.6 Successor | `(TBD)` | In-order successor logic with parent pointers |
-| 4.7 Build Order | `(TBD)` | Topological Sort |
+| 4.1 Route Between Nodes | `findPath`, `findPathDfs` | Graph Traversal (BFS/DFS) |
+| 4.2 Minimal Tree | `createBstFromSortedArray` | Recursive construction from sorted array |
+| 4.3 List of Depths | `listOfDepths`, `listOfDepths2`, `listOfDepths3` | Level-order traversal (BFS) |
+| 4.4 Check Balanced | `checkBalanced` | Recursive height checking |
+| 4.5 Validate BST | `validateBst` | In-order traversal or min/max range check |
+| 4.6 Successor | `findSuccessor` | In-order successor logic with parent pointers |
+| 4.7 Build Order | `findBuildOrder` | Topological Sort |
 | 4.8 First Common Ancestor | `firstCommonAncestor` | Recursive search from root |
-| 4.9 BST Sequences | `(TBD)` | Weaving sub-problem solutions (Recursion) |
-| 4.10 Check Subtree | `(TBD)` | Tree traversal and comparison |
-| 4.12 Paths with Sum | `(TBD)` | Recursive traversal with path sum tracking |
+| 4.9 BST Sequences | `bstSequences` | Weaving sub-problem solutions (Recursion) |
+| 4.10 Check Subtree | `checkSubtree` | Tree traversal and comparison |
+| 4.12 Paths with Sum | `pathSum` | Recursive traversal with path sum tracking |
 
 ### Chapter 5: Bit Manipulation
 *Solutions are in `src/main/java/bitmanipulation/BitManipulationProblems.java`*

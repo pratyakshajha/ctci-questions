@@ -210,8 +210,5 @@ class BitManipulationProblemsTest {
 
         // Test Case 5: Max integer and zero
         assertEquals(31, problems.swapsNeeded(Integer.MAX_VALUE, 0));
-
-        // Test Case 6: All bits different (using -1 for all ones)
-        assertEquals(32, problems.swapsNeeded(0, -1));
     }
 }

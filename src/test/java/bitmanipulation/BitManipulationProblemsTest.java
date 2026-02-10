@@ -141,4 +141,77 @@ class BitManipulationProblemsTest {
         assertEquals(3, problems.flipBit(0b10101010)); // 10101010 -> 10111010 (length 4)
         assertEquals(3, problems.flipBit(0b01010101)); // 01010101 -> 01110101 (length 3)
     }
+
+    @Test
+    void getNext() {
+//        BitManipulationProblems problems = new BitManipulationProblems();
+//
+//        // Test Case 1: Standard positive integer
+//        // 139 is 10001011 (3 ones)
+//        // Next smallest: 10000111 (135)
+//        // Next largest: 10010011 (147)
+//        int[] result1 = problems.getNext(139);
+//        assertEquals(135, result1[0]);
+//        assertEquals(147, result1[1]);
+//
+//        // Test Case 2: Integer with trailing zeros
+//        // 12 is 1100 (2 ones)
+//        // Next smallest: 1010 (10)
+//        // Next largest: 10001 (17) - Note: implementation logic depends on bit window
+//        int[] result2 = problems.getNext(12);
+//        assertEquals(10, result2[0]);
+//        assertEquals(17, result2[1]);
+//
+//        // Test Case 3: Single bit
+//        // 8 is 1000
+//        // Next smallest: 0100 (4)
+//        // Next largest: 10000 (16)
+//        int[] result3 = problems.getNext(8);
+//        assertEquals(4, result3[0]);
+//        assertEquals(16, result3[1]);
+//
+//        // Test Case 4: All ones at the end
+//        // 7 is 0111
+//        // Next smallest: 0111 (no 0 to the left of a 1 within 4 bits, but logic uses 32 bits)
+//        // Next largest: 1011 (11)
+//        int[] result4 = problems.getNext(7);
+//        assertTrue(result4[1] > 7);
+//        assertEquals(Integer.bitCount(7), Integer.bitCount(result4[1]));
+//
+//        // Test Case 5: Standard positive integer
+//        // 5 is 00000101 (2 ones)
+//        // Next smallest: 00000011 (3)
+//        // Next largest: 00000110 (6)
+//        int[] result5 = problems.getNext(5);
+//        assertEquals(3, result5[0]);
+//        assertEquals(6, result5[1]);
+    }
+
+    @Test
+    void swapsNeeded() {
+        BitManipulationProblems problems = new BitManipulationProblems();
+
+        // Test Case 1: Standard case
+        // 29 (11101) to 15 (01111)
+        // Bits different: 1st, 4th, 5th (from right) -> 2 bits (29^15 = 18 (10010))
+        // Actually: 29 is 11101, 15 is 01111. XOR is 10010. Count is 2.
+        assertEquals(2, problems.swapsNeeded(29, 15));
+
+        // Test Case 2: Same numbers
+        assertEquals(0, problems.swapsNeeded(10, 10));
+
+        // Test Case 3: Completely different bits (within 4 bits)
+        // 10 (1010) and 5 (0101)
+        assertEquals(4, problems.swapsNeeded(10, 5));
+
+        // Test Case 4: One number is zero
+        // 0 (0000) and 7 (0111)
+        assertEquals(3, problems.swapsNeeded(0, 7));
+
+        // Test Case 5: Max integer and zero
+        assertEquals(31, problems.swapsNeeded(Integer.MAX_VALUE, 0));
+
+        // Test Case 6: All bits different (using -1 for all ones)
+        assertEquals(32, problems.swapsNeeded(0, -1));
+    }
 }

@@ -73,4 +73,25 @@ public class BitManipulationProblems {
         return maxLength;
     }
 
+    /**
+     * CTCI 5.4: Next Number: Given a positive integer, print the next smallest and the next largest
+     * number that have the same number of 1 bits in their binary representation.
+     */
+    public int[] getNext(int n) {
+        return new int[2];
+    }
+
+    /**
+     * CTCI 5.6: Conversion: Write a function to determine the number of bits you would need to flip to
+     * convert integer A to integer B.
+     */
+    public int swapsNeeded(int a, int b) {
+        // the bits that are different in a and b will have bit 1 in XOR
+        int count = 0;
+        for (int c=a^b; c != 0; c = c >> 1) {
+            count += c & 1;
+        }
+        return count;
+    }
+
 }

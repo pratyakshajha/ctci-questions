@@ -88,7 +88,8 @@ public class BitManipulationProblems {
     public int swapsNeeded(int a, int b) {
         // the bits that are different in a and b will have bit 1 in XOR
         int count = 0;
-        for (int c=a^b; c != 0; c = c >> 1) {
+        // use unsigned right shift, otherwise loop will get stuck for -ve numbers
+        for (int c=a^b; c != 0; c = c >>> 1) {
             count += c & 1;
         }
         return count;
